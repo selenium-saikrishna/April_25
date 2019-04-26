@@ -1,0 +1,168 @@
+k8  created by google
+create oracle virtual box ubuntu16
+install docker
+node is a machine in kubernetes(menions)
+master is a node which manages the cluster
+
+slave  has kubelet
+kubectl is used for running kubernet commands
+
+
+pods
+Kubernetes does not deploy containers directly on workers.Instead it uses a pod
+
+
+
+
+---------------------
+
+
+  mkdir -p $HOME/.kube
+
+  sudo chown $(id -u):$(id -g) $HOME/.kube/config
+
+-------------------------------
+ kubectl apply -n kube-system -f \
+
+
+  kubectl get nodes
+==================================================================
+
+5
+
+5 To see the list of pods
+  or
+  shows ipaddress of pods and the node where the node  is deployed
+
+kubectl
+kubectl run nginx --image nginx
+
+ kubectl run --image=nginx nginx-app --port=80 --env="DOMAIN=cluster"
+2 To see all the pods
+
+  kubectl describe pods
+4 to start tomcat
+
+  kubectl run --image=mysql:5 mydb --env MYSQL_ROOT_PASSWORD=intelliq
+6 To go into interactive treminal
+
+
+kubectl logs -f nginx-app-zibvs
+To see detailed info about the pod
+
+kubectl delete deployment deployment_name_given_in_run_command
+
+
+---------------------------------
+apiVersion:  version of kubernetes api that is used to create this object
+metadata:
+
+apiVersion:  version of kubernetes api that is used to create this object
+Kind  :      Version
+POD:         v1
+ReplicasSet: apps/v1
+
+
+
+filtering of pod becomes easy if we label them in metadata
+vim pod-definition.yml
+
+metadata: 
+ labels:
+  type: front-end
+ containers:
+    image: nginx
+To run the above file
+
+kubectl delete -f pod-definition.yml
+To see the list of pods
+  or
+
+Name: postgres
+Container name: postgres
+
+apiVersion: v1
+metadata:
+  labels:
+spec:
+    - name: postgres
+...
+To run the above file
+
+kubectl delete -f pod-definition.yml
+====================================================
+kind: Pod
+  name: mysql
+    dbname: mydb
+  containers:
+      image: mysql:5
+       - name: MYSQL_ROOT_PASSWORD 
+...
+To delete
+
+kubectl create -f pod-definition.yml
+Replication Controller and Replica Sets
+Replication Controller:this is used for maintaining the number of pod instances in kubernetes class
+Replicas Set is used for the same purpose but it the more advanced
+vim rc-definition.yml
+kind: ReplicationController
+  name: nginx
+  replicas: 3
+    app: nginx
+    metadata:
+      labels:
+    spec:
+      - name: nginx
+        ports:
+          hostPort: 8080
+
+kubectl create -f rc.definition.yml
+To see waht is runnign in replicationcontroller
+
+kubectl get pods
+
+ReplicaSet
+vim replicaset-definition.yml
+kind: ReplicaSet
+ name: myapp-replicaset
+  app: myapp
+spec:
+  metadata:
+   labels:
+    type: front-end
+    containers:
+       image: nginx
+ selector:
+   type: front-end
+To create the replicas with the above file
+
+kubectl get replicaset
+For detailed info about replicaset
+
+kubectl get pods
+To delete a single pod
+
+To see all created objects
+
+=============================
+----------
+execute the below command
+
+kubectl scal --replicas=6 -f replicasset-definition.yml
+
+
+
+
+
+
+
+
+
+
+
+kubectl apply -n kube-system -f \
+
+
+
+                          WARNING!!!!
+ This is a sandbox environment. Using personal credentials
